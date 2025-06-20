@@ -1,0 +1,11 @@
+#!/bin/bash -xe
+
+snap=$(snapctl get --view :manage-snaps install)
+
+result=$(agent "$snap")
+compliant=$(echo "$response" | jq -r '.compliant')
+violation=$(echo "$response" | jq -r '.violations[0]')
+
+if [ "$compliant" != "true" ]; then
+    snapctl fail "$violation"
+fi

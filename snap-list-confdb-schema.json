@@ -1,0 +1,27 @@
+{
+    "type": "confdb-schema",
+    "authority-id": "f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN",
+    "account-id": "f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN",
+    "name": "snap-list",
+    "revision": "6",
+    "views": {
+        "observe-snaps": {
+            "rules": [
+                {
+                    "request": "installed",
+                    "storage": "installed"
+                }
+            ]
+        },
+        "manage-snaps": {
+            "rules": [
+                {
+                    "request": "install",
+                    "storage": "install"
+                }
+            ]
+        }
+    },
+    "body": "{\n  \"storage\": {\n    \"aliases\": {\n      \"name\": \"string\"\n    },\n    \"schema\": {\n      \"install\": \"string\",\n      \"installed\": {\n        \"keys\": \"$name\",\n        \"values\": {\n          \"schema\": {\n            \"channel\": {\n              \"ephemeral\": true,\n              \"type\": \"string\"\n            },\n            \"developer\": {\n              \"ephemeral\": true,\n              \"type\": \"string\"\n            },\n            \"summary\": {\n              \"ephemeral\": true,\n              \"type\": \"string\"\n            },\n            \"version\": {\n              \"ephemeral\": true,\n              \"type\": \"string\"\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+    "timestamp": "2025-06-20T07:31:20+00:00"
+}

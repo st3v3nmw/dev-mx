@@ -1,0 +1,13 @@
+#!/bin/bash -xe
+
+snap_data=$(curl --unix-socket /run/snapd.socket "http://localhost/v2/snaps" -s | \
+jq -c '.result | reduce .[] as $snap ({};
+    .[$snap.name] = {
+        "channel": $snap.channel,
+        "developer": $snap.developer,
+        "summary": $snap.summary,
+        "version": $snap.version
+    }
+)')
+
+snapctl set --view :observe-snaps "installed=$snap_data"

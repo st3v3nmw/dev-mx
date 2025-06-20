@@ -1,1 +1,3 @@
-# dev-mx
+# Dev MX
+
+Experimental device management agent.

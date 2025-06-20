@@ -1,0 +1,40 @@
+name: dev-mx
+base: core24
+version: "0.1"
+summary: Experimental device management agent
+description: |
+  Experimental device management agent.
+
+grade: devel
+confinement: devmode
+
+plugs:
+  observe-snaps:
+    interface: confdb
+    account: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
+    view: snap-list/observe-snaps
+    role: custodian
+  manage-snaps:
+    interface: confdb
+    account: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
+    view: snap-list/manage-snaps
+    role: custodian
+
+parts:
+  agent:
+    plugin: go
+    source: .
+    build-snaps:
+      - go/1.24/stable
+    stage-packages:
+      - bash
+      - curl
+      - jq
+    override-prime: |
+      snapcraftctl prime
+      mkdir -p ${SNAPCRAFT_PRIME}/policies
+      cp -r ${SNAPCRAFT_PART_SRC}/policies ${SNAPCRAFT_PRIME}/policies
+
+apps:
+  agent:
+    command: bin/agent
