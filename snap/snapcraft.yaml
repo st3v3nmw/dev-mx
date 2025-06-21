@@ -1,9 +1,9 @@
-name: dev-mx
+name: devd
 base: core24
 version: "0.1"
-summary: Experimental device management agent
+summary: An experimental device management agent
 description: |
-  Experimental device management agent.
+  An experimental device management agent.
 
 grade: devel
 confinement: devmode

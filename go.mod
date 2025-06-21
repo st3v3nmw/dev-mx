@@ -1,4 +1,4 @@
-module github.com/st3v3nmw/dev-mx
+module github.com/st3v3nmw/devd
 
 go 1.24.4
 

@@ -1,3 +1,3 @@
-# Dev MX
+# devd
 
-Experimental device management agent.
+An experimental device management agent.

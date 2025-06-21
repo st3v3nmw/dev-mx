@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/st3v3nmw/dev-mx/internal/engine"
+	"github.com/st3v3nmw/devd/internal/engine"
 )
 
 func main() {
