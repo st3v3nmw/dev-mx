@@ -12,12 +12,12 @@ plugs:
   observe-snaps:
     interface: confdb
     account: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
-    view: snap-list/observe-snaps
+    view: management/observe-snaps
     role: custodian
   manage-snaps:
     interface: confdb
     account: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
-    view: snap-list/manage-snaps
+    view: management/manage-snaps
     role: custodian
 
 parts:

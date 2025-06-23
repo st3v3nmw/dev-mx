@@ -1,0 +1,27 @@
+{
+    "type": "confdb-schema",
+    "authority-id": "f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN",
+    "account-id": "f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN",
+    "name": "management",
+    "revision": "2",
+    "views": {
+        "observe-snaps": {
+            "rules": [
+                {
+                    "request": "installed",
+                    "storage": "snaps.actual"
+                }
+            ]
+        },
+        "manage-snaps": {
+            "rules": [
+                {
+                    "request": "install",
+                    "storage": "snaps.desired"
+                }
+            ]
+        }
+    },
+    "body": "{\n  \"storage\": {\n    \"schema\": {\n      \"snaps\": {\n        \"schema\": {\n          \"actual\": {\n            \"keys\": \"string\",\n            \"values\": {\n              \"schema\": {\n                \"channel\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                },\n                \"developer\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                },\n                \"id\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                },\n                \"install-date\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                },\n                \"revision\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                },\n                \"status\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                },\n                \"summary\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                },\n                \"version\": {\n                  \"ephemeral\": true,\n                  \"type\": \"string\"\n                }\n              }\n            }\n          },\n          \"desired\": {\n            \"keys\": \"string\",\n            \"values\": {\n              \"schema\": {\n                \"channel\": {\n                  \"type\": \"string\"\n                },\n                \"developer\": {\n                  \"type\": \"string\"\n                },\n                \"id\": {\n                  \"type\": \"string\"\n                },\n                \"install-date\": {\n                  \"type\": \"string\"\n                },\n                \"revision\": {\n                  \"type\": \"string\"\n                },\n                \"status\": {\n                  \"type\": \"string\"\n                },\n                \"summary\": {\n                  \"type\": \"string\"\n                },\n                \"version\": {\n                  \"type\": \"string\"\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+    "timestamp": "2025-06-20T07:31:20+00:00"
+}

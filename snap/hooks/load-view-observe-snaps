@@ -3,10 +3,14 @@
 snap_data=$(curl --unix-socket /run/snapd.socket "http://localhost/v2/snaps" -s | \
 jq -c '.result | reduce .[] as $snap ({};
     .[$snap.name] = {
-        "channel": $snap.channel,
-        "developer": $snap.developer,
-        "summary": $snap.summary,
-        "version": $snap.version
+        "channel": $snap["channel"],
+        "developer": $snap["developer"],
+        "id": $snap["id"],
+        "install-date": $snap["install-date"],
+        "revision": $snap["revision"],
+        "status": $snap["status"],
+        "summary": $snap["summary"],
+        "version": $snap["version"]
     }
 )')
 

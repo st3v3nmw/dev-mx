@@ -1,0 +1,80 @@
+{
+    "storage": {
+        "schema": {
+            "snaps": {
+                "schema": {
+                    "actual": {
+                        "keys": "string",
+                        "values": {
+                            "schema": {
+                                "channel": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                },
+                                "developer": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                },
+                                "install-date": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                },
+                                "revision": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                },
+                                "status": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                },
+                                "summary": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "ephemeral": true
+                                }
+                            }
+                        }
+                    },
+                    "desired": {
+                        "keys": "string",
+                        "values": {
+                            "schema": {
+                                "channel": {
+                                    "type": "string"
+                                },
+                                "developer": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "install-date": {
+                                    "type": "string"
+                                },
+                                "revision": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "summary": {
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

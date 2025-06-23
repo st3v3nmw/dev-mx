@@ -1,16 +1,22 @@
+BLOCK = ["shady-wallet"]
 CONFLICTING = {"firefox": ["hello-world"]}
 
 
 def check_policy():
-    violations = []
+    result = {"violations": [], "plan": []}
+
+    if snap in BLOCK:
+        result["violations"].append(
+            "Installation of {} blocked by policy".format(snap)
+        )
 
     # Check if the snap being installed conflicts with any installed snaps
     for installed_snap in installed:
         if installed_snap in CONFLICTING:
             conflicting_snaps = CONFLICTING[installed_snap]
             if snap in conflicting_snaps:
-                violations.append(
-                    "Cannot install '{}' because '{}' is already installed".format(
+                result["violations"].append(
+                    "Cannot install {} because {} is already installed".format(
                         snap, installed_snap
                     )
                 )
@@ -20,13 +26,15 @@ def check_policy():
         conflicting_snaps = CONFLICTING[snap]
         for conflicting_snap in conflicting_snaps:
             if conflicting_snap in installed:
-                violations.append(
-                    "Cannot install '{}' because it conflicts with installed snap '{}'".format(
+                result["violations"].append(
+                    "Cannot install {} because it conflicts with installed snap {}".format(
                         snap, conflicting_snap
                     )
                 )
 
-    return {
-        "compliant": len(violations) == 0,
-        "violations": violations,
-    }
+    result["compliant"] = len(result["violations"]) == 0
+    if result["compliant"]:
+        # UNSAFE! Beats the whole point of sandboxing.
+        result["plan"] = ["snap install {}".format(snap)]
+
+    return result

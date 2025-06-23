@@ -1,0 +1,111 @@
+type: confdb-schema
+authority-id: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
+revision: 2
+account-id: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
+name: management
+timestamp: 2025-06-20T07:31:20+00:00
+views:
+  manage-snaps:
+    rules:
+      -
+        request: install
+        storage: snaps.desired
+  observe-snaps:
+    rules:
+      -
+        request: installed
+        storage: snaps.actual
+body-length: 2015
+sign-key-sha3-384: xkd_Y2ay5N2Uo14v_wsCtfVJYLAVbJgxbiKM8Ne4mZBflaROriZgk2nb5i9Oebum
+
+{
+  "storage": {
+    "schema": {
+      "snaps": {
+        "schema": {
+          "actual": {
+            "keys": "string",
+            "values": {
+              "schema": {
+                "channel": {
+                  "ephemeral": true,
+                  "type": "string"
+                },
+                "developer": {
+                  "ephemeral": true,
+                  "type": "string"
+                },
+                "id": {
+                  "ephemeral": true,
+                  "type": "string"
+                },
+                "install-date": {
+                  "ephemeral": true,
+                  "type": "string"
+                },
+                "revision": {
+                  "ephemeral": true,
+                  "type": "string"
+                },
+                "status": {
+                  "ephemeral": true,
+                  "type": "string"
+                },
+                "summary": {
+                  "ephemeral": true,
+                  "type": "string"
+                },
+                "version": {
+                  "ephemeral": true,
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "desired": {
+            "keys": "string",
+            "values": {
+              "schema": {
+                "channel": {
+                  "type": "string"
+                },
+                "developer": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "install-date": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+AcLBcwQAAQoAHRYhBHCftZeyXSJlNBvC+h+HHdMBlPLtBQJoWP3VAAoJEB+HHdMBlPLtZKgQAKKT
+svNDN1O+c+vQKe9X9YmyQMUHd4UBjJjoUOrRNO8P10CBVk58Li1hRHFRpEKwmJ4CFRh1Lb1iW3hY
+Ki5WgPhopIhKEDQW1GIBxdEOHlJGY/5PPBYBh6rYJXqAuxdoBf5ISoOuJ3z+YlWGGdONWAt1FW4/
+IxKBmkXbWjUSXrKZBtD9jvuCGhPebbk77xs9THd25UYQhBYtTru9hL7aFgAfFlXqnqLESPUbm92e
+1d9dXeXJicMPyP31qlC95jlzqi5gPsQyWmCkNHw7ok0u1SEY/EO4KZFrIMrCEynfPBoJYzo0dOzs
+tDLXyk0B7GhDgDNowju2xnt/qr5wM8aUjHptZZPBcthCUv9/wok3AIWBcJ9J2xJjxjODCmN1tY3E
+ZqkuvRwGXKRsDqAz8LKvzyoizA5ikDzMkqHBoO5/dwbCV6PI355/XMDuml/J2rGaIypuyW113vlr
+lBnRBA0lUsBLaVyeNfBrxDomx4aOjeLP0tBYGFrvvrC7fNZjSBp1d5tmhfD7PkuhRqGkWxp5JLmB
+fDbctTpKuQNIY3vSAgXG5sS1KruChLgw2lPK5TNcQ3QRa3stCdMvVDhT9ofZ3EIazgCU0jHK8ECp
+EIDbTxRhIrhVJvfzECfc9WZL1e/LJYL/0JKHJ7UaFfdEZbSvnEkiXiFLejWI63tFnQC51eCA
