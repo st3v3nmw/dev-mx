@@ -74,6 +74,18 @@
                         }
                     }
                 }
+            },
+            "experimental-flags": {
+                "schema": {
+                    "actual": {
+                        "keys": "string",
+                        "values": "bool"
+                    },
+                    "desired": {
+                        "keys": "string",
+                        "values": "bool"
+                    }
+                }
             }
         }
     }
