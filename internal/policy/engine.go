@@ -63,7 +63,7 @@ func Check(policy string, args map[string]string) ValidationResult {
 		violations[i] = string(violationsList.Index(i).(starlark.String))
 	}
 
-	planVal, found, err := dict.Get(starlark.String("string"))
+	planVal, found, err := dict.Get(starlark.String("plan"))
 	if !found || err != nil {
 		log.Fatalf("Couldn't extract .plan value: %v\n", err)
 	}
@@ -77,5 +77,6 @@ func Check(policy string, args map[string]string) ValidationResult {
 	return ValidationResult{
 		Compliant:  compliant,
 		Violations: violations,
+		Plan:       plan,
 	}
 }
