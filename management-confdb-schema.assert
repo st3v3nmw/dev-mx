@@ -1,6 +1,6 @@
 type: confdb-schema
 authority-id: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
-revision: 3
+revision: 4
 account-id: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
 name: management
 timestamp: 2025-06-20T07:31:20+00:00
@@ -8,12 +8,12 @@ views:
   manage-experimental-flags:
     rules:
       -
-        request: set
+        request: flags
         storage: experimental-flags.desired
   manage-snaps:
     rules:
       -
-        request: install
+        request: installed
         storage: snaps.desired
   observe-experimental-flags:
     rules:
@@ -121,13 +121,13 @@ sign-key-sha3-384: xkd_Y2ay5N2Uo14v_wsCtfVJYLAVbJgxbiKM8Ne4mZBflaROriZgk2nb5i9Oe
   }
 }
 
-AcLBcwQAAQoAHRYhBHCftZeyXSJlNBvC+h+HHdMBlPLtBQJoWSQkAAoJEB+HHdMBlPLtv0wQAKY0
-aVFDBOmqwmdDGOBJ460NBEzuasTtlvZdenKF4SgUKiB4BiC72p4tgQmcwsWqssKlY0z72Wu0h4mX
-brNQxRLJQokHk/ETGPIqHHdmFnvisGuobpsG+f6HVqoKKB3FvPtEHXGWMwOw9SFlrw5SzMWA5EQY
-8DXzRXFNrJSrYKRWtsgoY+SNgV/0wCNTqNvyTNhpOnyYZo2labYorU39+kOAuY7URnZ8weIAh2ZF
-IuDZX0HBTUdwJDzoFsi9Awh37Dv/yKwfyKxuKDmPi3UV6ST9I5hTovY50CfPgtq28V8BFas+vWu0
-kvO+0R+H6ASTb7E7x1A+gc0QF/MMS8ZTGw9Igw57AS99ZqA7lPpxfb8MDLW9MXRmYISqw+FDQ/ER
-gFHGefvMTMFwPFFTzdSpOoSPXZXIDJ31kzKs5KWtmEAc8/zVD/Knm1zoDjTOkzjgQj2RPnNjnvC9
-t6+Bjrp5/srlRwV2btLqWj5W68qBYjNmLX1CkvdVDXSZ+V346xwDX7ejPdsz0Vc2hBkRcxe3P08c
-3ea6jCbsU5pPbrE++4MOpcS4lCGTy4JL6fY7A8N/cr0rW7COTYeWPEZB3pSuI3etC1rM8aNjJQYd
-SUc9FXFXvIv/0Ih631Yrt6UvyeUAUMIfy/VvpNwV/Kva9FQgmpvTPGrSNv34pCVuxmVnbUuE
+AcLBcwQAAQoAHRYhBHCftZeyXSJlNBvC+h+HHdMBlPLtBQJoW5/HAAoJEB+HHdMBlPLtbpoP/1C9
+4eFNTBkpDpjknTFKd0CsqPIQiUeHzCViraFTXaG5/SWIYR16a/rDuHhHpBOaTgkgP04w8qIGF2Di
+rS7d6+8ja0GPwQApLSyGNRhsfTEaT07ovNczgk8njCPQrSK+JjY0rEiNCrGs2yuf2R/ZrktD5HiO
+rKBnwNryutMRCS+sFRz1aXu0k1Z1dYlRMb3Vkmry5f9wU8hekZJgslLhtNUcaPpWWJEDLlctsQIb
+H5natJ3oEdNgGLSllo+RQzwIpfDIG+6mXrRMh1zbyLpi+Fh8Cc31mjLv/pJ/2kjdVd3dN2MiZF9j
+gYGGVykE1MQ97HCXUvieZc9GNbA06o0I5CQEkaT/Qeyzh7RVQhT8Mp8d1twOt0K3umilSkuclY6I
+LyUrwJigtrPbmolKvob8dg4V2w9sz37J/X45JrHAz0l4XdRV0tQTJ58hR15l5KmD4LFZMWxFj50A
+OakbDlqbwo5ow1aDJempXaAVkf7u1ya7nsG9IkMB2JoDvtcS5XmIxyIIbkn6KSILDl92vvSU9EdP
+xkeulFySEe6UnKgw/297NjKbu2HBE7EpaV8gHHb595Y0jzOX4Zkrmftl30TI5EmFVnwu2ktWMK3N
+5gTeeYby3UF52Z6UbWeFoD+b59LP/sEw09fbXKpvXnbJesz3oCf+c3EUIANzmzQ6sR+/0agL

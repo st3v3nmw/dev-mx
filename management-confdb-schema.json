@@ -3,7 +3,7 @@
     "authority-id": "f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN",
     "account-id": "f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN",
     "name": "management",
-    "revision": "3",
+    "revision": "4",
     "views": {
         "observe-snaps": {
             "rules": [
@@ -16,7 +16,7 @@
         "manage-snaps": {
             "rules": [
                 {
-                    "request": "install",
+                    "request": "installed",
                     "storage": "snaps.desired"
                 }
             ]
@@ -32,7 +32,7 @@
         "manage-experimental-flags": {
             "rules": [
                 {
-                    "request": "set",
+                    "request": "flags",
                     "storage": "experimental-flags.desired"
                 }
             ]

@@ -19,6 +19,16 @@ plugs:
     account: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
     view: management/manage-snaps
     role: custodian
+  observe-experimental-flags:
+    interface: confdb
+    account: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
+    view: management/observe-experimental-flags
+    role: custodian
+  manage-experimental-flags:
+    interface: confdb
+    account: f22PSauKuNkwQTM9Wz67ZCjNACuSjjhN
+    view: management/manage-experimental-flags
+    role: custodian
 
 parts:
   agent:
@@ -38,3 +48,5 @@ parts:
 apps:
   agent:
     command: bin/agent
+    plugs:
+      - snapd-control

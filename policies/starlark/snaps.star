@@ -1,40 +1,44 @@
 BLOCK = ["shady-wallet"]
+
 CONFLICTING = {"firefox": ["hello-world"]}
 
 
 def check_policy():
     result = {"violations": [], "plan": []}
 
-    if snap in BLOCK:
-        result["violations"].append(
-            "Installation of {} blocked by policy".format(snap)
-        )
+    for snap in new_snaps:
+        if snap in BLOCK:
+            result["violations"].append(
+                "installation of {} blocked by policy".format(snap)
+            )
 
-    # Check if the snap being installed conflicts with any installed snaps
-    for installed_snap in installed:
-        if installed_snap in CONFLICTING:
-            conflicting_snaps = CONFLICTING[installed_snap]
-            if snap in conflicting_snaps:
-                result["violations"].append(
-                    "Cannot install {} because {} is already installed".format(
-                        snap, installed_snap
+        # Check if the snap being installed conflicts with any installed snaps
+        for installed_snap in installed_snaps:
+            if installed_snap in CONFLICTING:
+                conflicting_snaps = CONFLICTING[installed_snap]
+                if snap in conflicting_snaps:
+                    result["violations"].append(
+                        "cannot install {} because {} is already installed".format(
+                            snap, installed_snap
+                        )
                     )
-                )
 
-    # Check if any installed snaps would conflict with the snap being installed
-    if snap in CONFLICTING:
-        conflicting_snaps = CONFLICTING[snap]
-        for conflicting_snap in conflicting_snaps:
-            if conflicting_snap in installed:
-                result["violations"].append(
-                    "Cannot install {} because it conflicts with installed snap {}".format(
-                        snap, conflicting_snap
+        # Check if any installed snaps would conflict with the snap being installed
+        if snap in CONFLICTING:
+            conflicting_snaps = CONFLICTING[snap]
+            for conflicting_snap in conflicting_snaps:
+                if conflicting_snap in installed_snaps:
+                    result["violations"].append(
+                        "cannot install {} because it conflicts with installed snap {}".format(
+                            snap, conflicting_snap
+                        )
                     )
-                )
 
     result["compliant"] = len(result["violations"]) == 0
     if result["compliant"]:
         # UNSAFE! Beats the whole point of sandboxing.
-        result["plan"] = ["snap install {}".format(snap)]
+        # Plan to install the snaps.
+        for snap in new_snaps:
+            result["plan"].append("snap install {}".format(snap))
 
     return result

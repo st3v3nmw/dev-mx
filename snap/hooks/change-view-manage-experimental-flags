@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-result=$(agent check snaps)
+result=$(agent check experimental-flags)
 compliant=$(echo "$result" | jq -r '.compliant')
 violations=$(echo "$result" | jq -r '.violations | join("; ")')
 error=$(echo "$result" | jq -r '.error // empty | select(length > 0)')

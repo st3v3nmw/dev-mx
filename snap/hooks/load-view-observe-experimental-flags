@@ -1,0 +1,6 @@
+#!/bin/bash -xe
+
+flag_data=$(curl --unix-socket /run/snapd.socket "http://localhost/v2/snaps/system/conf?keys=experimental" -s | \
+jq .result.experimental)
+
+snapctl set --view :observe-experimental-flags  "flags=$flag_data"
