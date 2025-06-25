@@ -36,7 +36,7 @@ def check_policy():
 
     result["compliant"] = len(result["violations"]) == 0
     if result["compliant"]:
-        # UNSAFE! Beats the whole point of sandboxing.
+        # Unsafe & very kumbaya, this is a significant attack vector.
         # Plan to install the snaps.
         for snap in new_snaps:
             result["plan"].append("snap install {}".format(snap))

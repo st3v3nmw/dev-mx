@@ -43,7 +43,7 @@ def check_policy():
 
     result["compliant"] = len(result["violations"]) == 0
     if result["compliant"]:
-        # UNSAFE! Beats the whole point of sandboxing.
+        # Unsafe & very kumbaya, this is a significant attack vector.
         # Plan to enable the flags.
         for flag in new_flags:
             result["plan"].append("snap set system experimental.{}=true".format(flag))

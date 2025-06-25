@@ -3,6 +3,7 @@ package engine
 import (
 	"encoding/json"
 	"fmt"
+	"os/exec"
 
 	"github.com/canonical/starlark/starlark"
 	"github.com/st3v3nmw/devd/internal/gatherer"
@@ -21,6 +22,20 @@ type ValidationResult struct {
 func (r ValidationResult) String() string {
 	out, _ := json.MarshalIndent(r, "", "  ")
 	return string(out)
+}
+
+// Unsafe & very kumbaya, this is a significant attack vector.
+func (r ValidationResult) ExecutePlan() {
+	if len(r.Plan) == 0 {
+		return
+	}
+
+	go func() {
+		for _, command := range r.Plan {
+			cmd := exec.Command("bash", "-c", command)
+			cmd.Run()
+		}
+	}()
 }
 
 func CheckPolicy(policy string) ValidationResult {
@@ -96,6 +111,9 @@ func CheckPolicy(policy string) ValidationResult {
 	for i := 0; i < planList.Len(); i++ {
 		result.Plan[i] = string(planList.Index(i).(starlark.String))
 	}
+
+	// Unsafe & very kumbaya, this is a significant attack vector.
+	result.ExecutePlan()
 
 	return result
 }
