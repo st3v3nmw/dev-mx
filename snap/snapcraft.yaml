@@ -36,12 +36,15 @@ parts:
     source: .
     build-snaps:
       - go/1.24/stable
+    override-build: |
+      go install -p 4 ./...
     stage-packages:
       - bash
       - curl
       - jq
     override-prime: |
       snapcraftctl prime
+
       mkdir -p ${SNAPCRAFT_PRIME}/policies
       cp -r ${SNAPCRAFT_PART_SRC}/policies ${SNAPCRAFT_PRIME}/policies
 

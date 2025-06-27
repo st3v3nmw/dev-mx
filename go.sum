@@ -1,3 +1,5 @@
+github.com/canonical/starform v0.0.0-20250428162619-69e4d8a22b98 h1:/ZJvmlN9CvIy8ifOjl8QWRc4rK9JSr5KQV6F20Bem6I=
+github.com/canonical/starform v0.0.0-20250428162619-69e4d8a22b98/go.mod h1:D0n/xpvuBbdMTygtdnratUr8kzXWo+FIayINJ/cOln8=
 github.com/canonical/starlark v0.0.0-20250617110226-9289a36db04e h1:HgyE8DT1YgUGNMySe3rYu3xlHebuSKTEvbSzDhrDjBg=
 github.com/canonical/starlark v0.0.0-20250617110226-9289a36db04e/go.mod h1:fbhY9i7ZAcza52PfUCd9PDIBFJJMYsAj22/3Q3sU6IY=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

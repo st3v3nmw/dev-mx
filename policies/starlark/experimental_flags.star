@@ -17,18 +17,20 @@ KNOWN_FLAGS = [
     "refresh-app-awareness-ux",
     "confdb",
     "confdb-control",
-    "apparmor-prompting"
+    "apparmor-prompting",
 ]
 
-DEPENDENCIES = {
-    "confdb-control": ["confdb", "parallel-instances"]
-}
+DEPENDENCIES = {"confdb-control": ["confdb", "parallel-instances"]}
 
 
-def check_policy():
+def init():
+    engine.observe("experimental_flags", check_policy)
+
+
+def check_policy(event):
     result = {"violations": [], "plan": []}
 
-    for flag in new_flags:
+    for flag in event.new_flags:
         if flag not in KNOWN_FLAGS:
             result["violations"].append("unknown flag {}".format(flag))
 
@@ -36,7 +38,10 @@ def check_policy():
         if flag in DEPENDENCIES:
             for dependency in DEPENDENCIES[flag]:
                 # Violation if dependency isn't enabled
-                if dependency not in experimental_flags or not experimental_flags[dependency]:
+                if (
+                    dependency not in event.experimental_flags
+                    or not event.experimental_flags[dependency]
+                ):
                     result["violations"].append(
                         "flag {} requires {} to be enabled".format(flag, dependency)
                     )
@@ -45,7 +50,7 @@ def check_policy():
     if result["compliant"]:
         # Unsafe & very kumbaya, this is a significant attack vector.
         # Plan to enable the flags.
-        for flag in new_flags:
+        for flag in event.new_flags:
             result["plan"].append("snap set system experimental.{}=true".format(flag))
 
-    return result
+    engine.set_result(result)

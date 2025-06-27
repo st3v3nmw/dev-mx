@@ -1,13 +1,22 @@
 package engine
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os/exec"
 
+	"github.com/canonical/starform/starform"
 	"github.com/canonical/starlark/starlark"
 	"github.com/st3v3nmw/devd/internal/gatherer"
 	"github.com/st3v3nmw/devd/policies"
+)
+
+var (
+	policyNames = []string{
+		"snaps",
+		"experimental_flags",
+	}
 )
 
 type ValidationResult struct {
@@ -38,41 +47,78 @@ func (r ValidationResult) ExecutePlan() {
 	}()
 }
 
-func CheckPolicy(policy string) ValidationResult {
+type Engine struct {
+	scriptSet *starform.ScriptSet
+}
+
+type ScriptSource struct {
+	name string
+}
+
+func (ss *ScriptSource) Path() string {
+	return fmt.Sprintf("starlark/%s.star", ss.name)
+}
+
+func (ss *ScriptSource) Content(ctx context.Context) ([]byte, error) {
+	return policies.StarlarkPoliciesFS.ReadFile(ss.Path())
+}
+
+func New() (*Engine, error) {
+	setResult := starlark.NewBuiltin("set_result", func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
+		event := starform.Event(thread)
+		event.Attrs["result"] = args[0]
+		return starlark.None, nil
+	})
+
+	app := &starform.AppObject{
+		Name:    "engine",
+		Methods: []*starlark.Builtin{setResult},
+	}
+
+	scriptSet, err := starform.NewScriptSet(&starform.ScriptSetOptions{
+		App:       app,
+		MaxAllocs: 10 * 1024 * 1024,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	sources := []starform.ScriptSource{}
+	for _, policy := range policyNames {
+		sources = append(sources, &ScriptSource{name: policy})
+	}
+
+	err = scriptSet.LoadSources(context.TODO(), sources)
+	if err != nil {
+		return nil, fmt.Errorf("cannot load sources: %v", err)
+	}
+
+	return &Engine{scriptSet: scriptSet}, nil
+}
+
+func (e *Engine) CheckPolicy(policy string) ValidationResult {
 	var result ValidationResult
 
 	// Declare context to pass to Starlark
-	context, err := gatherer.Get(policy)
+	ctx, err := gatherer.Get(policy)
 	if err != nil {
 		result.Error = err.Error()
 		return result
 	}
 
-	// Execute Starlark program
-	thread := &starlark.Thread{Name: "Check Password Policy"}
-	policyFile := fmt.Sprintf("starlark/%s.star", policy)
-
-	src, err := policies.StarlarkPoliciesFS.ReadFile(policyFile)
-	if err != nil {
-		result.Error = fmt.Sprintf("cannot execute policy file: %v", err)
-		return result
+	// Handle event
+	event := &starform.EventObject{
+		Name:  policy,
+		Attrs: ctx,
 	}
-
-	globals, err := starlark.ExecFile(thread, policyFile, src, context)
-	if err != nil {
-		result.Error = fmt.Sprintf("cannot execute policy file: %v", err)
-		return result
-	}
-
-	// Check the policy
-	checkPolicy := globals["check_policy"]
-	v, err := starlark.Call(thread, checkPolicy, nil, nil)
+	err = e.scriptSet.Handle(context.TODO(), event)
 	if err != nil {
 		result.Error = fmt.Sprintf("cannot check policy: %v", err)
 		return result
 	}
 
 	result.Checked = true
+	v := event.Attrs["result"]
 
 	// Extract returned values
 	dict, ok := v.(*starlark.Dict)

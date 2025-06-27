@@ -10,7 +10,7 @@ func Get(policy string) (starlark.StringDict, error) {
 	switch policy {
 	case "snaps":
 		return getSnapContext()
-	case "experimental-flags":
+	case "experimental_flags":
 		return getExperimentalFlagsContext()
 	}
 

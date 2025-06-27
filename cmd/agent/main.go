@@ -11,6 +11,11 @@ import (
 )
 
 func main() {
+	e, err := engine.New()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	cmd := &cli.Command{
 		Commands: []*cli.Command{
 			{
@@ -29,7 +34,7 @@ func main() {
 						return fmt.Errorf("policy name is required")
 					}
 
-					result := engine.CheckPolicy(args.First())
+					result := e.CheckPolicy(args.First())
 					fmt.Println(result)
 					return nil
 				},
